@@ -1,8 +1,7 @@
 import { useParams } from 'react-router-dom';
-
 import { useGetPostByIdQuery } from '../services/JSONPlaceholder';
 
-import { Container } from 'react-bootstrap';
+import { Alert, Container, Spinner } from 'react-bootstrap';
 import PostDetails from '../components/PostDetails';
 
 function PostDetailsPage() {
@@ -15,9 +14,15 @@ function PostDetailsPage() {
 	const { data: post, isLoading, isError } = useGetPostByIdQuery(Number(postId));
 
 	if (isLoading) {
-		return <p>LOADING...</p>;
+		return (
+			<div className='d-flex justify-content-center'>
+				<Spinner animation='border' role='status'>
+					<span className='visually-hidden'>Loading...</span>
+				</Spinner>
+			</div>
+		);
 	} else if (isError) {
-		return <p>Error!! No se pudo traer los datos</p>;
+		return <Alert variant='danger'>Error!! No se pudo traer los datos</Alert>;
 	}
 
 	return (

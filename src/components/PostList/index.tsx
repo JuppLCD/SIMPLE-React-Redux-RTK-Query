@@ -1,13 +1,21 @@
 import { useGetPostsQuery } from '../../services/JSONPlaceholder';
+
 import { Link } from 'react-router-dom';
+import { Alert, Spinner } from 'react-bootstrap';
 
 function PostList() {
 	const { data: posts, isLoading, isError } = useGetPostsQuery(undefined);
 
 	if (isLoading) {
-		return <p>LOADING...</p>;
+		return (
+			<div className='d-flex justify-content-center'>
+				<Spinner animation='border' role='status'>
+					<span className='visually-hidden'>Loading...</span>
+				</Spinner>
+			</div>
+		);
 	} else if (isError) {
-		return <p>Error!! No se pudo traer los posts</p>;
+		return <Alert variant='danger'>Error!! No se pudo traer los posts</Alert>;
 	}
 
 	return (

@@ -3,13 +3,13 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { store } from './store';
 import { Provider } from 'react-redux';
 
-import Page from './pages';
+import Layout from './layout';
 
 function App() {
 	return (
 		<Provider store={store}>
 			<Router>
-				<Page />
+				<Layout />
 			</Router>
 		</Provider>
 	);

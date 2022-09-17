@@ -1,5 +1,6 @@
 import { useGetCommentsOfPostByIdQuery } from '../../services/JSONPlaceholder';
 
+import { Alert, Spinner } from 'react-bootstrap';
 import CommentsDetails from '../CommentsDetails';
 
 import type { Post } from '../../types/redux';
@@ -15,12 +16,16 @@ function PostDetails({ post }: Props) {
 			<h1>{post.title}</h1>
 			<p>{post.body}</p>
 			<hr />
-			<h2>Comments</h2>
+			<h4>Comments</h4>
 			{isLoading ? (
-				<p>LOADIN...</p>
+				<div className='d-flex justify-content-center'>
+					<Spinner animation='border' role='status'>
+						<span className='visually-hidden'>Loading...</span>
+					</Spinner>
+				</div>
 			) : (
 				<>
-					{isError && <p>Error al buscar los posts</p>}
+					{isError && <Alert variant='danger'>Error al buscar los posts</Alert>}
 
 					<ul>
 						{comments?.length === 0 && <p>No hay posts</p>}

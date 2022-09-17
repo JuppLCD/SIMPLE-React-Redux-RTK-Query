@@ -7,8 +7,8 @@ interface Props {
 function CommentsDetails({ comment }: Props) {
 	return (
 		<li>
-			<h4>{comment.email}</h4>
-			<h5>{comment.name}</h5>
+			<h5>Title: {comment.name}</h5>
+			<h6>From: {comment.email}</h6>
 			<p>{comment.body}</p>
 		</li>
 	);
