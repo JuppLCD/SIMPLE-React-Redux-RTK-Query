@@ -12,3 +12,9 @@ export interface Comment {
 	email: string;
 	body: string;
 }
+
+export interface NewPost {
+	title: string;
+	body: string;
+	userId: number;
+}
