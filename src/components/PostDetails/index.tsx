@@ -1,4 +1,4 @@
-import { useGetCommentsOfPostByIdQuery } from '../../services/JSONPlaceholder';
+import { useGetCommentsOfPostByIdQuery, useGetUserByIdQuery } from '../../services/JSONPlaceholder';
 
 import { Alert, Spinner } from 'react-bootstrap';
 import CommentsDetails from '../CommentsDetails';
@@ -11,9 +11,16 @@ interface Props {
 
 function PostDetails({ post }: Props) {
 	const { data: comments, isError, isLoading } = useGetCommentsOfPostByIdQuery(post.id);
+	const { data: user, isError: isErrorUser } = useGetUserByIdQuery(post.userId);
+
 	return (
 		<article>
 			<h1>{post.title}</h1>
+			{!isErrorUser && user && (
+				<h6>
+					Creator: {user.username} | {user.email} | {user.phone}
+				</h6>
+			)}
 			<p>{post.body}</p>
 			<hr />
 			<h4>Comments</h4>

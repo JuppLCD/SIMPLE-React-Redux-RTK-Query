@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { API } from '../config';
 
-import type { Comment, NewPost, Post } from '../types/redux';
+import type { Comment, NewPost, Post, User } from '../types/redux';
 
 export const JSONPlaceholderAPI = createApi({
 	reducerPath: 'JSONPlaceholderAPI',
@@ -20,11 +20,19 @@ export const JSONPlaceholderAPI = createApi({
 		getPostById: builder.query<Post, number>({
 			query: (postId) => `/posts/${postId}`,
 		}),
+
+		// getComments: builder.query<Comment[], undefined>({
+		// 	query: () => `/comments`,
+		// }),
 		getCommentsOfPostById: builder.query<Comment[], number>({
 			query: (postId) => `/posts/${postId}/comments`,
 		}),
-		getComments: builder.query<Comment[], undefined>({
-			query: () => `/comments`,
+
+		// getUsers: builder.query<User[], undefined>({
+		// 	query: () => `/users`,
+		// }),
+		getUserById: builder.query<User, number>({
+			query: (userId) => `/users/${userId}`,
 		}),
 
 		newPost: builder.mutation<Post, NewPost>({
@@ -46,6 +54,6 @@ export const {
 	useGetPostsQuery,
 	useGetPostByIdQuery,
 	useGetCommentsOfPostByIdQuery,
-	useGetCommentsQuery,
+	useGetUserByIdQuery,
 	useNewPostMutation,
 } = JSONPlaceholderAPI;
